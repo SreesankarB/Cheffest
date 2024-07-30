@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Cheffest</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Basic reset */
+        body,
+        h1,
+        h2,
+        p,
+        ul,
+        li {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Ensure containers do not have extra margin or padding */
+        .container {
+            margin-top: 0;
+            padding: 0 15px;
+        }
+
+        /* Ensure flexbox containers align properly */
+        .flex {
+            display: flex;
+        }
+
+        .flex-1 {
+            flex: 1;
+        }
+
+        /* Remove extra space caused by header or nav */
+        header,
+        nav {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Space between headings and paragraphs */
+        h1,
+        h2 {
+            margin-bottom: 15px;
+            /* Adjust as needed */
+        }
+
+        p {
+            margin-bottom: 20px;
+            /* Adjust as needed */
+        }
+
+        /* Highlight active link */
+        .navbar a.active {
+            color: #f00;
+            /* Change to your desired color */
+            font-weight: bold;
+        }
+
+        /* Ensure footer is correctly placed */
+        footer {
+            margin-top: 20px;
+        }
+
+        /* Add styles for buttons if needed */
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+
+        .slider {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .slider-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .prev-btn {
+            left: 0;
+        }
+
+        .next-btn {
+            right: 0;
+        }
+
+        .food-slider {
+            display: flex;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .food-card {
+            flex: 0 0 auto;
+            width: 220px;
+            /* Increase width to give more space inside the card */
+            margin: 0 10px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 15px;
+            /* Adjusted padding for better fit */
+        }
+
+        .product-image img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .stars img {
+            width: 20px;
+            height: auto;
+        }
+
+        .price {
+            margin: 15px 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .btn-wrapper {
+            margin: 20px 0;
+        }
+
+        section.top-products {
+            background: var(--light);
+            padding: 4rem 0;
+            /* Ensure there's enough padding */
+        }
+
+        .section-heading {
+            font-family: "Raleway-bold";
+            text-align: center;
+            position: relative;
+            margin-bottom: 6rem;
+        }
+
+        .section-heading:after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 30px;
+            background-image: url(../icons/hr.svg);
+            background-repeat: no-repeat;
+            background-position: center;
+            position: absolute;
+            bottom: -40px;
+        }
+
+        .food-slider {
+            display: flex;
+            overflow-x: auto;
+            padding: 1rem 0;
+        }
+
+        .food-slider .food-card {
+            background: var(--heaven);
+            padding: 1.5rem;
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .food-slider .food-card:hover {
+            transform: scale(1.05);
+        }
+
+        .food-slider .food-card .product-image img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            padding-bottom: 1rem;
+        }
+
+        .food-slider .food-card h2 {
+            font-family: "Raleway-bold";
+            font-size: 1.3rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .food-slider .food-card .stars {
+            margin-bottom: 0.5rem;
+        }
+
+        .food-slider .food-card .stars img {
+            margin-right: 0.25rem;
+        }
+
+        .food-slider .food-card .price {
+            font-family: "Raleway-medium";
+            color: var(--danger);
+            margin-bottom: 1rem;
+        }
+
+        .food-slider .food-card button {
+            font-family: "Raleway-medium";
+            color: var(--secondary);
+            background: var(--heaven);
+            border: 2px solid var(--primary);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            /* Ensure the button takes the full width */
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0.75rem;
+            justify-content: center;
+            /* Center the content inside the button */
+        }
+
+        .food-slider .food-card button:hover {
+            background: var(--primary);
+            color: var(--heaven);
+        }
+
+        .food-slider .food-card button img {
+            background: var(--primary);
+            padding: 0.5rem;
+            height: 32px;
+            margin-right: 1.2rem;
+            border-radius: 4px;
+            /* Ensure the image inside the button has rounded corners */
+        }
+
+        .slick-slide {
+            margin: 0 15px;
+            /* Adjust spacing between slides */
+        }
+
+        .slick-list {
+            margin: 0 -15px;
+            /* Adjust spacing to compensate for slide margins */
+        }
+
+        .top-products .slider-btn {
+            width: 30px;
+            height: 30px;
+            border: none;
+            background: var(--primary);
+            border-radius: 4px;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .prev-btn {
+            position: absolute;
+            top: 50%;
+            left: -2rem;
+            z-index: 1;
+        }
+
+        .next-btn {
+            position: absolute;
+            top: 50%;
+            right: -2rem;
+            z-index: 1;
+        }
+
+        .top-products .slider {
+            position: relative;
+        }
+
+        .top-products .btn-wrapper {
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-wrapper">
+        <div class="nav-background">
+            <div class="mobile-logo">
+                <img src="/images/restaurantLOGOnew.png" alt="img">
+            </div>
+            <div class="mobile-nav">
+                <div class="cart">
+                    <div class="flex items-center">
+                        <img src="./icons/cart-dark.svg" alt="">
+                        <a href="#">0 Items - ($0.00)</a>
+                    </div>
+                </div>
+                <div class="nav-top">
+                    <ul>
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                        <li>
+                            <a href="about.html">About us</a>
+                        </li>
+                        <li>
+                            <a href="products.html">Products</a>
+                        </li>
+                        <li>
+                            <a href="blog.html">Blog</a>
+                        </li>
+                        <li>
+                            <a href="services.html">Services</a>
+                        </li>
+                        <li>
+                            <a href="contactus.html">Contact us</a>
+                        </li>
+                        <li>
+                            <a href="login.html">Log in</a>
+                        </li>
+                        <li>
+                            <a href="register.html">Register</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="contact flex items-center">
+                    <img src="./icons/phone.svg" alt="">
+                    <div>
+                        <h5>Contact : +918888888888</h5>
+                        <h6>E-mail : admin@website.com</h6>
+                    </div>
+                </div>
+                <div class="time flex items-center">
+                    <img src="./icons/clock.svg" alt="">
+                    <div>
+                        <h5>Working Hours: </h5>
+                        <h6>Mon - Sat (8.00am - 11.00pm)</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="site-content-wrapper">
+            <div class="nav-trigger">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-bar-chart">
+                    <line x1="12" y1="20" x2="12" y2="10" />
+                    <line x1="18" y1="20" x2="18" y2="4" />
+                    <line x1="6" y1="20" x2="6" y2="16" />
+                </svg>
+            </div>
+            <div class="site-content">
+                <header class="topbar">
+                    <div class="container flex justify-between items-center">
+                        <div class="icons">
+                            <a href="#"><img src="./icons/facebook.svg" alt="Facebook"></a>
+                            <a href="#"><img src="./icons/twitter.svg" alt="Twitter"></a>
+                            <a href="#"><img src="./icons/google.svg" alt="Google"></a>
+                            <a href="#"><img src="./icons/instagram.svg" alt="Instagram"></a>
+                            <a href="#"><img src="./icons/search.svg" alt="Search"></a>
+                        </div>
+                        <div class="auth flex items-center">
+                            <div>
+                                <img src="./icons/user-icon.svg" alt="User">
+                                <a href="login.html">Log in</a>
+                            </div>
+                            <span class="divider">|</span>
+                            <div>
+                                <img src="./icons/edit.svg" alt="Register">
+                                <a href="register.html">Register Now</a>
+                            </div>
+                            <span class="divider">|</span>
+                            <div>
+                                <img src="./icons/cart.svg" alt="Cart">
+                                <a href="cart.html">0 Items - ($0.00)</a>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+                <nav>
+                    <div class="top">
+                        <div class="container flex justify-between">
+                            <div class="contact flex items-center">
+                                <img src="./icons/phone.svg" alt="Phone">
+                                <div>
+                                    <h5>WhatsApp: +918888888888</h5>
+                                    <h6>E-mail: admin@website.com</h6>
+                                </div>
+                            </div>
+                            <div class="branding">
+                                <img src="./icons/logo.svg" alt="">
+                            </div>
+                            <div class="time flex items-center">
+                                <img src="./icons/clock.svg" alt="Clock">
+                                <div>
+                                    <h5>Working Hours:</h5>
+                                    <h6>Mon - Sat (8.00am - 11.00pm)</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="navbar magic-shadow">
+                        <div class="container flex justify-center">
+                            <a href="index.html">Home</a>
+                            <a href="about.html">About us</a>
+                            <a href="products.html" class="active">Products</a>
+                            <a href="blog.html" >Blog</a>
+                            <a href="services.html">Services</a>
+                            <a href="gallery.html">Gallery</a>
+                            <a href="contactus.html">Contact us</a>
+                        </div>
+                    </div>
+                </nav>
+
+    <div class="container">
+        <div class="container">
+            <h1 class="section-heading"><br>Top products</h1>
+            <div class="slider">
+                <button class="slider-btn prev-btn"><img src="./icons/pre.svg" alt=""></button>
+                <button class="slider-btn next-btn"><img src="./icons/next.svg" alt=""></button>
+                <div class="food-slider">
+                    <div class="food-card magic-shadow-sm">
+                        <div class="product-image flex items-center justify-center">
+                            <img src="./images/plate-1.png" alt="">
+                        </div>
+                        <hr>
+                        <div>
+                            <h2 class="text-center">Summer Salad</h2>
+                            <div class="stars flex justify-center items-center">
+                                <img src="./icons/start-filled.svg" alt="">
+                                <img src="./icons/start-filled.svg" alt="">
+                                <img src="./icons/start-filled.svg" alt="">
+                                <img src="./icons/star-grey.svg" alt="">
+                                <img src="./icons/star-grey.svg" alt="">
+                            </div>
+                            <div class="price text-center">
+                                ₹ 125
+                            </div>
+                            <div class="flex justify-center">
+                                <a href="checkoutpage.html">
+                                    <button>
+                                        <img src="./icons/cart-2.svg" alt="">
+                                        <span>Add to cart</span>
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="food-card magic-shadow-sm">
+                        <div class="product-image flex items-center justify-center">
+                            <img src="./images/plate-2.png" alt="">
+                        </div>
+                        <hr>
+                        <div>
+                            <h2 class="text-center">Russian Salad</h2>
+                            <div class="stars flex justify-center items-center">
+                                <img src="./icons/start-filled.svg" alt="">
+                                <img src="./icons/start-filled.svg" alt="">
+                                <img src="./icons/start-filled.svg" alt="">
+                                <img src="./icons/star-grey.svg" alt="">
+                                <img src="./icons/star-grey.svg" alt="">
+                            </div>
+                            <div class="price text-center">
+                                ₹ 125
+                            </div>
+                            <div class="flex justify-center">
+                                <a href="checkoutpage.html">
+                                    <button>
+                                        <img src="./icons/cart-2.svg" alt="">
+                                        <span>Add to cart</span>
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="food-card magic-shadow-sm">
+                        <div class="product-image flex items-center justify-center">
+                            <img src="./images/plate-3.png" alt="">
+                        </div>
+                        <hr>
+                        <div>
+                            <h2 class="text-center">Greek Salad</h2>
+                            <div class="stars flex justify-center items-center">
+                                <img src="./icons/start-filled.svg" alt="">
+                                <img src="./icons/start-filled.svg" alt="">
+                                <img src="./icons/start-filled.svg" alt="">
+                                <img src="./icons/star-grey.svg" alt="">
+                                <img src="./icons/star-grey.svg" alt="">
+                            </div>
+                            <div class="price text-center">
+                                ₹ 125
+                            </div>
+                            <div class="flex justify-center">
+                                <a href="checkoutpage.html">
+                                    <button>
+                                        <img src="./icons/cart-2.svg" alt="">
+                                        <span>Add to cart</span>
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="food-card magic-shadow-sm">
+                        <div class="product-image flex items-center justify-center">
+                            <img src="./images/plate-3.png" alt="">
+                        </div>
+                        <hr>
+                        <div>
+                            <h2 class="text-center">Cottage pie</h2>
+                            <div class="stars flex justify-center items-center">
+                                <img src="./icons/start-filled.svg" alt="">
+                                <img src="./icons/start-filled.svg" alt="">
+                                <img src="./icons/start-filled.svg" alt="">
+                                <img src="./icons/star-grey.svg" alt="">
+                                <img src="./icons/star-grey.svg" alt="">
+                            </div>
+                            <div class="price text-center">
+                                ₹ 125
+                            </div>
+                            <div class="flex justify-center">
+                                <a href="checkoutpage.html">
+                                    <button>
+                                        <img src="./icons/cart-2.svg" alt="">
+                                        <span>Add to cart</span>
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="food-card magic-shadow-sm">
+                        <div class="product-image flex items-center justify-center">
+                            <img src="./images/plate-3.png" alt="">
+                        </div>
+                        <hr>
+                        <div>
+                            <h2 class="text-center">Cottage pie</h2>
+                            <div class="stars flex justify-center items-center">
+                                <img src="./icons/start-filled.svg" alt="">
+                                <img src="./icons/start-filled.svg" alt="">
+                                <img src="./icons/start-filled.svg" alt="">
+                                <img src="./icons/star-grey.svg" alt="">
+                                <img src="./icons/star-grey.svg" alt="">
+                            </div>
+                            <div class="price text-center">
+                                ₹ 125
+                            </div>
+                            <div class="flex justify-center">
+                                <a href="checkoutpage.html">
+                                    <button>
+                                        <img src="./icons/cart-2.svg" alt="">
+                                        <span>Add to cart</span>
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center btn-wrapper">
+                <button class="btn btn-secondary">View More</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="box">
+                <h3>About us</h3>
+                <p>It was popularised in the 1960 with the release of Latest sheets containing Lorem Ipsum
+                    passage.</p>
+                <button class="btn btn-secondary">Read More</button>
+            </div>
+            <div class="box">
+                <h3>Quik Links</h3>
+                <ul>
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    <li>
+                        <a href="about.html">About us</a>
+                    </li>
+                    <li>
+                        <a href="products.html">Products</a>
+                    </li>
+                    <li>
+                        <a href="blog.html">Blog</a>
+                    </li>
+                    <li>
+                        <a href="services.html">Services</a>
+                    </li>
+                    <li>
+                        <a href="gallery.html">Gallery</a>
+                    </li>
+                    <li>
+                        <a href="contactus.html">Contact us</a>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="box">
+                <h3>Follow Us</h3>
+                <div>
+                    <ul>
+                        <li>
+                            <a href="https://www.facebook.com/">
+                                <img src="./icons/facebook.svg" alt="">
+                                <span>Facebook</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <img src="./icons/twitter.svg" alt="">
+                                <span>Twitter</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <img src="./icons/google.svg" alt="">
+                                <span>Google +</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/">
+                                <img src="./icons/instagram.svg" alt="">
+                                <span>Instagram</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="box instagram-api">
+                <h3>Instagram</h3>
+                <div class="post-wrap">
+                    <div>
+                        <img src="./images/food-table.jpg" alt="">
+                    </div>
+                    <div>
+                        <img src="./images/food-table.jpg" alt="">
+                    </div>
+                    <div>
+                        <img src="./images/food-table.jpg" alt="">
+                    </div>
+                    <div>
+                        <img src="./images/food-table.jpg" alt="">
+                    </div>
+                    <div>
+                        <img src="./images/food-table.jpg" alt="">
+                    </div>
+                    <div>
+                        <img src="./images/food-table.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <footer class="copyright">
+        <div>
+            Copyright © 2024 .All rights reserved by <a
+                href="https://www.linkedin.com/in/sreesankar25">SREESANKAR B</a>.
+        </div>
+    </footer>
+</div>
+</div>
+</div>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<!-- <script src="js/app.js"></script> -->
+</body>
+
+</html>

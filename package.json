@@ -1,0 +1,16 @@
+{
+  "name": "restaurant-website",
+  "version": "1.0.0",
+  "description": "Responsive Restaurant website using Html, Css and JavaScript!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Sreesankar B",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {}
+}
