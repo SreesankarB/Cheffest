@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Login - Cheffest</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Basic reset */
+        body,
+        h1,
+        h2,
+        p,
+        ul,
+        li {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Ensure containers do not have extra margin or padding */
+        .container {
+            margin-top: 0;
+            padding: 0 15px;
+        }
+
+        body {
+            background: url('/images/coffee.jpg') no-repeat center center fixed;
+            background-size: cover;
+            /* Ensures the image covers the entire screen */
+        }
+
+        /* Center the form */
+        .form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-box {
+            padding: 30px;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            background: #fff;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+
+        .auth-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .auth-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        img {
+            width: 27%;
+            height: auto;
+        }
+
+        p {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-container">
+        <div class="form-box">
+            <h1>Login</h1>
+            <form action="loggedin.html" method="get">
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <button type="submit" class="btn">Log In</button>
+            </form>
+            <div class="auth-link">
+                <p>Don't have an account? <a href="register.html">Register Now</a></p>
+            </div>
+            <div class="website-link">
+                <p><br>Redirect to <a href="index.html"><img src="/images/restaurantLOGOnew.png"></img></a></p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

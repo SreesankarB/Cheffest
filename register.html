@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Cheffest</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Basic reset */
+        body, h1, h2, p, ul, li {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+         /* Ensure containers do not have extra margin or padding */
+         .container {
+            margin-top: 0;
+            padding: 0 15px;
+        }
+
+        /* Background image for the entire page */
+        body {
+            background-image: url('/images/donut.jpg'); /* Adjust the path to your image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Center the form */
+        .form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            /* width: 100%; */
+        }
+
+        .form-box {
+            padding: 30px;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+        }
+
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"], input[type="email"], input[type="password"], select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+
+        .auth-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .auth-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        img {
+            width: 27%;
+            height: auto;
+        }
+
+        p{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <div class="form-box">
+            <h1>Register</h1>
+            <form action="login.html" method="get">
+                <input type="text" name="username" placeholder="Username" pattern="^[a-zA-Z0-9_-]{3,16}$" title="Username should be 3-16 characters long and can only contain letters, numbers, underscores, and hyphens" required>
+                <input type="email" name="email" placeholder="Email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Please enter a valid email address" required>
+                <input type="password" name="password" placeholder="Password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" title="Password must be at least 8 characters long and contain both letters and numbers" >
+                <input type="password" name="confirm_password" placeholder="Confirm Password" >
+                <select name="country" required>
+                    <option value="india" selected>India (+91)</option>
+                    <option value="us">United States (+1)</option>
+                    <option value="uk">United Kingdom (+44)</option>
+                    <option value="aus">Australia (+61)</option>
+                    <option value="can">Canada (+1)</option>
+                    <!-- Add more countries as needed -->
+                </select>
+                <input type="text" name="phone" placeholder="Phone Number" pattern="^\d{10}$" title="Phone number should be 10 digits long" required>
+                <button type="submit" class="btn">Register Now</button>
+            </form>
+            <div class="auth-link">
+                <p>Already have an account? <a href="login.html">Log In</a></p>
+            </div>
+            <div class="website-link">
+                <p><br>Redirect to <a href="index.html"><img src="/images/restaurantLOGOnew.png" alt="Restaurant Logo"></a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
